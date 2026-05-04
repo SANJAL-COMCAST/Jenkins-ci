@@ -1,0 +1,27 @@
+{
+  "name": "jenkins-ci",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+  "test": "jest --coverage"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SANJAL-COMCAST/Jenkins-ci.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SANJAL-COMCAST/Jenkins-ci/issues"
+  },
+  "homepage": "https://github.com/SANJAL-COMCAST/Jenkins-ci#readme",
+  "devDependencies": {
+    "jest": "^30.3.0"
+  }
+}
