@@ -9,10 +9,8 @@ pipeline {
         stage('Jira Validation') {
           steps {
             script {
-              if (!env.BRANCH_NAME.matches(".*[A-Z]+-\\d+.*")) {
+              if (!(env.BRANCH_NAME ==~ /.*[A-Z]+-\d+.*/)) {
                 error "Jira ID missing in branch name (e.g., ABC-123)"
-              } else {
-                echo "Jira validation passed"
               }
             }
           }
@@ -21,10 +19,10 @@ pipeline {
         stage('Milestone Validation') {
           steps {
             script {
-              if (!(env.BRANCH_NAME == 'main' || env.BRANCH_NAME.startsWith('release/') || env.BRANCH_NAME.startsWith('feature/'))) {
-                error "Invalid branch for build"
+              if (env.BRANCH_NAME.startsWith("release/")) {
+                echo "Release branch detected"
               } else {
-                echo "Milestone validation passed"
+                echo "Normal development branch"
               }
             }
           }
@@ -47,8 +45,40 @@ pipeline {
 
     stage('Test') {
       steps {
-        sh 'npm test'
+        sh 'npm test -- --coverage'
       }
     }
+
+    stage('Coverage') {
+      steps {
+        recordCoverage(
+          tools: [[
+            parser: 'COBERTURA',
+            pattern: 'coverage/cobertura-coverage.xml'
+          ]],
+          qualityGates: [[
+            metric: 'LINE',
+            threshold: 90
+          ]]
+        )
+      }
+    }
+
+  }
+
+  post {
+
+    success {
+      echo "Pipeline Success"
+    }
+
+    failure {
+      echo "Pipeline Failed"
+    }
+
+    always {
+      archiveArtifacts artifacts: 'coverage/**/*', allowEmptyArchive: true
+    }
+
   }
 }

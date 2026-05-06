@@ -9,6 +9,9 @@
   "scripts": {
   "test": "jest --coverage"
 },
+"jest": {
+  "coverageReporters": ["text", "cobertura"]
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SANJAL-COMCAST/Jenkins-ci.git"
