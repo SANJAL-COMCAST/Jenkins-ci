@@ -7,14 +7,22 @@ pipeline {
       parallel {
 
         stage('Jira Validation') {
-          steps {
-            script {
-              if (!(env.BRANCH_NAME ==~ /.*[A-Z]+-\d+.*/)) {
-                error "Jira ID missing in branch name (e.g., ABC-123)"
-              }
-            }
-          }
-        }
+  steps {
+    script {
+
+      if (env.BRANCH_NAME == 'main') {
+        echo "Skipping Jira validation for main"
+        return
+      }
+
+      if (!(env.BRANCH_NAME ==~ /.*[A-Z]+-[0-9]+.*/)) {
+        error "Jira ID missing in branch name (e.g., ABC-123)"
+      }
+
+      echo "Jira validation passed"
+    }
+  }
+}
 
         stage('Milestone Validation') {
           steps {
