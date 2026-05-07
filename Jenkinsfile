@@ -6,7 +6,7 @@ pipeline {
 
     // ===== JFrog Config =====
     JFROG_REGISTRY = 'trial1vvj9n.jfrog.io'
-    JFROG_REPOSITORY = 'docker-local'
+    JFROG_REPOSITORY = 'docker-local-docker'
 
     IMAGE_NAME = 'my-nginx'
     IMAGE_TAG = "${BUILD_NUMBER}"
