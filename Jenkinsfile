@@ -4,6 +4,15 @@ agent {
   label 'gami2023'
 }
 
+options {
+
+  buildDiscarder(logRotator(
+    numToKeepStr: '2',
+    artifactNumToKeepStr: '2'
+  ))
+
+}
+
   environment {
 
     // JFrog Config 
