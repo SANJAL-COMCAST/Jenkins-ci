@@ -16,8 +16,8 @@ options {
   environment {
 
     // JFrog Config 
-    JFROG_REGISTRY = 'trial1vvj9n.jfrog.io'
-    JFROG_REPOSITORY = 'docker-local-docker'
+    JFROG_REGISTRY = 'trialy42p8p.jfrog.io'
+    JFROG_REPOSITORY = 'docker-docker-local'
 
     IMAGE_NAME = 'my-nginx'
     IMAGE_TAG = "${BUILD_NUMBER}"
